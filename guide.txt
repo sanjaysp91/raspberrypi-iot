@@ -1,0 +1,37 @@
+After working with various embedded Linux systems for over a decade, I have learnt some critical lessons that would be helpful to anyone building robust and maintainable embedded Linux systems. Each point below is based on practical lessons learnt while building products that are already in the market.
+
+Choose Protocol Buffers over JSON for communication. Protobuf offers better performance, a smaller memory footprint, and type safety.
+
+Leverage SQLite instead of custom file-based databases. SQLite is well-tested, lightweight, and perfect for embedded applications. It eliminates custom file parsing and data corruption handling.
+
+Implement proper logging frameworks early. Use structured logging (e.g. protobuf) for better parsing and analysis using tools.
+
+Don't reinvent the wheel - use proven and well-tested mechanisms like RAUC, Mender, SWUpdate, etc, for firmware updates instead of custom implementations.
+
+For inter-application communication, research existing open source IPC libraries before building custom ones. A quick Google search points to Eclipse iceoryx and ByteDance shmipc, which offer zero-copy communication.
+
+Implement comprehensive unit testing for reusable libraries. Mock hardware interfaces to enable testing without physical hardware. This prevents breakage across products/teams.
+
+Containerization can simplify deployment and updates. However, evaluate overhead carefully for resource-constrained systems.
+
+Power optimization should be architectural, not an afterthought - design state machines that naturally support low-power modes.
+
+Implement proper system monitoring and health checks, and use watchdog timers to recover from faults.
+
+Version control and branching strategies matter a lot for proper integration across project management tools.
+
+Enforce good commit messages and code review practices.
+
+Implement Continuous Integration with hardware-in-the-loop testing. Set up CI pipelines that test on actual hardware.
+
+Use tools like Yocto and Buildroot for reproducible builds. Document exact versions and build environments to recreate historical builds.
+
+Invest in proper debugging infrastructure. JTAG and protocol analyzers are essential; don't rely solely on printf debugging.
+
+Provide ways to extract system state, logs, and performance metrics from deployed devices. This is invaluable for field troubleshooting.
+
+Security should be designed in, not bolted on. Plan and implement proper certificate and key management, secure boot, and secure firmware updates from the start.
+
+Plan for hardware evolution and variants.
+
+Analyze open-source licenses thoroughly before adoption. Some require source disclosure, which may not be acceptable for commercial products.
